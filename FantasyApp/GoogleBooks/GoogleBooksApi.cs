@@ -5,10 +5,21 @@ namespace FantasyApp.BookApi
     public class GoogleBooksApi : IGoogleBooksApi
     {
         private readonly HttpClient _httpClient;
-        private readonly string apiKey = "AIzaSyBUy9rfBft2H7yey8YQo1WsLohg1-o4b5c";
-        public Task<List<Volume>> GetVolumesByName(string search)
+        
+
+        public GoogleBooksApi(HttpClient httpClient)
         {
-            throw new NotImplementedException();
+            _httpClient = httpClient;
+        }
+
+        public async Task<List<Volume>> GetVolumesByName(string search)
+        {
+           HttpResponseMessage? response = await _httpClient.GetAsync($"/volumes?q={search}+subject:fantasy&key={apiKey}");
+
+            if(response.IsSuccessStatusCode)
+            {
+
+            }
         }
     }
 }

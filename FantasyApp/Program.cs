@@ -21,7 +21,9 @@ builder.Services.AddSpaStaticFiles(configuration =>
     configuration.RootPath = "client/dist";
 });
 
-
+builder.Services.AddHttpClient<IGoogleBooksApi, GoogleBooksApi>(httpClient => {
+    httpClient.BaseAddress = new Uri("https://www.googleapis.com/books/v1");
+});
 
 var app = builder.Build();
 
