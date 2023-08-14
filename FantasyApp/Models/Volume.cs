@@ -6,6 +6,7 @@ namespace FantasyApp.Models
     public class Volume
     {
         public Guid VolumeId { get; set; }
+        public string? GoogleId { get; set; }
         public string Title { get; set; } = string.Empty;
         [DataType(DataType.Date)]
         public DateTime Published_date { get; set; }

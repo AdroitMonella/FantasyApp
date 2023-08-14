@@ -7,29 +7,35 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FantasyApp.Data;
 using FantasyApp.Models;
+using FantasyApp.BookApi;
 
 namespace FantasyApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VolumesController : ControllerBase
+    public class VolumeController : ControllerBase
     {
+        private readonly IGoogleBooksApi _googleBooksApi;
         private readonly FantasyAppContext _context;
 
-        public VolumesController(FantasyAppContext context)
+        public VolumeController(FantasyAppContext context, IGoogleBooksApi googleBooksApi)
         {
             _context = context;
+            _googleBooksApi = googleBooksApi;
         }
 
         // GET: api/Volumes
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Volume>>> GetVolume()
+        [HttpGet("(search)")]
+        public async Task<ActionResult> GetVolumesByName(string search)
         {
-          if (_context.Volume == null)
-          {
-              return NotFound();
-          }
-            return await _context.Volume.ToListAsync();
+            List<Volume>? apiResponse = await _googleBooksApi.GetVolumesByName(search);
+
+            return Ok(apiResponse);
+          //if (_context.Volume == null)
+          //{
+          //    return NotFound();
+          //}
+          //  return await _context.Volume.ToListAsync();
         }
 
         // GET: api/Volumes/5

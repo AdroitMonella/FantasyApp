@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using FantasyApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 builder.Services.AddDbContext<FantasyAppContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FantasyAppContext") ?? throw new InvalidOperationException("Connection string 'FantasyAppContext' not found.")));
 
@@ -22,8 +24,10 @@ builder.Services.AddSpaStaticFiles(configuration =>
 });
 
 builder.Services.AddHttpClient<IGoogleBooksApi, GoogleBooksApi>(httpClient => {
-    httpClient.BaseAddress = new Uri("https://www.googleapis.com/books/v1");
+    httpClient.BaseAddress = new Uri("https://www.googleapis.com");
 });
+
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -50,6 +54,11 @@ var spaPath = "/app";
 
 if (app.Environment.IsDevelopment())
 {
+    builder.Configuration.AddUserSecrets<Program>();
+
+    app.UseSwagger();
+    app.UseSwaggerUI();
+
     app.MapWhen(y => y.Request.Path.StartsWithSegments(spaPath), client =>
     {
         client.UseSpa(spa =>
