@@ -17,10 +17,16 @@
         public string publisher { get; set; } = string.Empty;
         public string publishedDate { get; set; }
         public string description { get; set; } = string.Empty;
-        public int ISBN_13 { get; set; }
-        public int ISBN_10 { get; set; }
+
         public string printType { get; set; } = string.Empty;
         public List<string> categories { get; set; }
         public string language { get; set; } = string.Empty;
+        public ImageLinks? imageLinks { get; set; }
+    }
+
+    public class ImageLinks
+    {
+        public string smallThumbnail { get; set; }
+        public string thumbnail { get; set; }
     }
 }

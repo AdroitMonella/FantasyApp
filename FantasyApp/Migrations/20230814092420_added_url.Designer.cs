@@ -4,6 +4,7 @@ using FantasyApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FantasyApp.Migrations
 {
     [DbContext(typeof(FantasyAppContext))]
-    partial class FantasyAppContextModelSnapshot : ModelSnapshot
+    [Migration("20230814092420_added_url")]
+    partial class added_url
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,10 +112,10 @@ namespace FantasyApp.Migrations
                     b.Property<string>("GoogleId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ISBN_10")
+                    b.Property<int>("ISBN_10")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ISBN_13")
+                    b.Property<int>("ISBN_13")
                         .HasColumnType("int");
 
                     b.Property<string>("Language")

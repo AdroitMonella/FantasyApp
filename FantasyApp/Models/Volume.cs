@@ -11,10 +11,15 @@ namespace FantasyApp.Models
         [DataType(DataType.Date)]
         public DateTime Published_date { get; set; }
         public string Description { get; set; } = string.Empty;
-        public int ISBN_10 { get; set; }
-        public int ISBN_13 { get; set; }
+        public int? ISBN_10 { get; set; }
+        public int? ISBN_13 { get; set; }
         public string Language { get; set; }
         public string PrintType { get; set; }
+        [DataType(DataType.ImageUrl)]
+        public string SmallThumbnail { get; set; }
+        
+        [DataType(DataType.ImageUrl)]
+        public string Thumbnail { get; set; }
 
         //Navigation Properties
         public virtual ICollection<Author>? Authors { get; set; }

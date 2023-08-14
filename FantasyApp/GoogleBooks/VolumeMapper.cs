@@ -11,15 +11,15 @@ namespace FantasyApp.GoogleBooks
             Volume volume = new()
             {
                 GoogleId = apiVolume.id,
-                Title = apiVolume.volumeInfo.title,
+                Title = apiVolume.volumeInfo!.title,
                 Published_date = GetYearFromPublicDate(apiVolume.volumeInfo.publishedDate),
                 Description = apiVolume.volumeInfo.description,
-                ISBN_10 = apiVolume.volumeInfo.ISBN_10,
-                ISBN_13 = apiVolume.volumeInfo.ISBN_13,
                 Language = apiVolume.volumeInfo.language,
                 PrintType = apiVolume.volumeInfo.printType,
                 Authors = new List<Author>(),
-                Categories = new List<Category>()
+                Categories = new List<Category>(),
+                SmallThumbnail = apiVolume.volumeInfo.imageLinks!.smallThumbnail,
+                Thumbnail = apiVolume.volumeInfo.imageLinks.thumbnail
             };
 
             foreach (var author in apiVolume.volumeInfo.authors)
